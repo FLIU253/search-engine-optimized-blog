@@ -24,7 +24,7 @@ const Header = props => {
     <div>
       <Navbar color="light" light expand="md">
         <Link href="/">
-          <NavbarBrand>{APP_NAME}</NavbarBrand>
+          <NavLink className="font-weight-bold">{APP_NAME}</NavLink>
         </Link>
         <NavbarToggler onClick={toggle} />
         <Collapse isOpen={isOpen} navbar>
