@@ -13,6 +13,7 @@ import {
   DropdownMenu,
   DropdownItem
 } from "reactstrap";
+import Link from "next/link";
 
 const Header = props => {
   const [isOpen, setIsOpen] = useState(false);
@@ -22,17 +23,21 @@ const Header = props => {
   return (
     <div>
       <Navbar color="light" light expand="md">
-        <NavbarBrand href="/">{APP_NAME}</NavbarBrand>
+        <Link href="/">
+          <NavbarBrand>{APP_NAME}</NavbarBrand>
+        </Link>
         <NavbarToggler onClick={toggle} />
         <Collapse isOpen={isOpen} navbar>
           <Nav className="ml-auto" navbar>
             <NavItem>
-              <NavLink href="/components/">Components</NavLink>
+              <Link href="/signin">
+                <NavLink>signin</NavLink>
+              </Link>
             </NavItem>
             <NavItem>
-              <NavLink href="https://github.com/reactstrap/reactstrap">
-                GitHub
-              </NavLink>
+              <Link href="/signup">
+                <NavLink>Signup</NavLink>
+              </Link>
             </NavItem>
           </Nav>
         </Collapse>
