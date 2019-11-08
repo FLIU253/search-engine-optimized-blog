@@ -71,14 +71,12 @@ const Header = () => {
 
             {isAuth() && (
               <NavItem>
-                <Link>
-                  <NavLink
-                    style={{ cursor: "pointer" }}
-                    onClick={() => signout(() => Router.replace("/signin"))}
-                  >
-                    Signout
-                  </NavLink>
-                </Link>
+                <NavLink
+                  style={{ cursor: "pointer" }}
+                  onClick={() => signout(() => Router.replace("/signin"))}
+                >
+                  Signout
+                </NavLink>
               </NavItem>
             )}
           </Nav>
