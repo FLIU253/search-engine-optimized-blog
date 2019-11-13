@@ -1,13 +1,13 @@
-import { Fragment, useState, useEffect } from "react";
-import { signup, isAuth } from "../../actions/auth";
+import { useState, useEffect } from "react";
+import { signup, isAuth, preSignup } from "../../actions/auth";
 import Router from "next/router";
 import Link from "next/link";
 
 const SignupComponent = () => {
   const [values, setValues] = useState({
-    name: "",
-    email: "",
-    password: "",
+    name: "Ryan",
+    email: "ryan@gmail.com",
+    password: "rrrrrr",
     error: "",
     loading: false,
     message: "",
@@ -17,18 +17,18 @@ const SignupComponent = () => {
   const { name, email, password, error, loading, message, showForm } = values;
 
   useEffect(() => {
-    isAuth() && Router.push("/");
+    isAuth() && Router.push(`/`);
   }, []);
 
   const handleSubmit = e => {
     e.preventDefault();
+    // console.table({ name, email, password, error, loading, message, showForm });
     setValues({ ...values, loading: true, error: false });
     const user = { name, email, password };
 
-    signup(user).then(data => {
-      console.log(data);
+    preSignup(user).then(data => {
       if (data.error) {
-        setValues({ ...values, error: data.error });
+        setValues({ ...values, error: data.error, loading: false });
       } else {
         setValues({
           ...values,
@@ -44,17 +44,15 @@ const SignupComponent = () => {
     });
   };
 
-  const handleChange = value => e => {
-    setValues({ ...values, error: false, [value]: event.target.value });
+  const handleChange = name => e => {
+    setValues({ ...values, error: false, [name]: e.target.value });
   };
 
   const showLoading = () =>
     loading ? <div className="alert alert-info">Loading...</div> : "";
-
   const showError = () =>
     error ? <div className="alert alert-danger">{error}</div> : "";
-
-  const ShowMessage = () =>
+  const showMessage = () =>
     message ? <div className="alert alert-info">{message}</div> : "";
 
   const signupForm = () => {
@@ -91,23 +89,23 @@ const SignupComponent = () => {
         </div>
 
         <div>
-          <button className="btn btn-primary">Sign up</button>
+          <button className="btn btn-primary">Signup</button>
         </div>
       </form>
     );
   };
 
   return (
-    <Fragment>
+    <React.Fragment>
       {showError()}
       {showLoading()}
-      {ShowMessage()}
+      {showMessage()}
       {showForm && signupForm()}
       <br />
       <Link href="/auth/password/forgot">
-        <a className="btn btn-outline-danger btn-small">Forgot password</a>
+        <a className="btn btn-outline-danger btn-sm">Forgot password</a>
       </Link>
-    </Fragment>
+    </React.Fragment>
   );
 };
 

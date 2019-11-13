@@ -6,7 +6,8 @@ const {
   signout,
   requiresSignin,
   forgotPassword,
-  resetPassword
+  resetPassword,
+  preSignup
 } = require("../controllers/auth");
 
 //validators
@@ -18,7 +19,8 @@ const {
   resetPasswordValidator
 } = require("../validators/auth");
 
-router.post("/signup", userSignupValidator, runValidation, signup);
+router.post("/pre-signup", userSignupValidator, runValidation, preSignup);
+router.post("/signup", signup);
 router.post("/signin", userSigninValidator, runValidation, signin);
 router.get("/signout", userSigninValidator, runValidation, signout);
 
