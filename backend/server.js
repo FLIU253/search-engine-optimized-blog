@@ -5,17 +5,18 @@ const cookieParser = require("cookie-parser");
 const cors = require("cors");
 const mongoose = require("mongoose");
 require("dotenv").config();
-//bring routes
+// bring routes
 const blogRoutes = require("./routes/blog");
 const authRoutes = require("./routes/auth");
 const userRoutes = require("./routes/user");
 const categoryRoutes = require("./routes/category");
 const tagRoutes = require("./routes/tag");
 const formRoutes = require("./routes/form");
-//app
+
+// app
 const app = express();
 
-//db
+// db
 mongoose
   .connect(process.env.DATABASE, {
     useNewUrlParser: true,
@@ -23,25 +24,28 @@ mongoose
     useFindAndModify: false,
     useUnifiedTopology: true
   })
-  .then(() => console.log("DB connected"));
+  .then(() => console.log("DB connected"))
+  .catch(err => {
+    console.log(err);
+  });
 
-//middlewares
+// middlewares
 app.use(morgan("dev"));
 app.use(bodyParser.json());
 app.use(cookieParser());
-
-//cors
+// cors
 if (process.env.NODE_ENV === "development") {
   app.use(cors({ origin: `${process.env.CLIENT_URL}` }));
 }
-//routes middleware
+// routes middleware
 app.use("/api", blogRoutes);
 app.use("/api", authRoutes);
 app.use("/api", userRoutes);
 app.use("/api", categoryRoutes);
 app.use("/api", tagRoutes);
 app.use("/api", formRoutes);
-//port
+
+// port
 const port = process.env.PORT || 8000;
 app.listen(port, () => {
   console.log(`Server is running on port ${port}`);
