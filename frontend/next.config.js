@@ -7,6 +7,7 @@ module.exports = withCSS({
     PRODUCTION: false,
     DOMAIN_DEVELOPMENT: "http://localhost:3000",
     DOMAIN_PRODUCTION: "",
-    FACE_APP_ID: "1033238083677412"
+    FACE_APP_ID: "1033238083677412",
+    DISQUS_SHORTNAME: "seoblog-5"
   }
 });
