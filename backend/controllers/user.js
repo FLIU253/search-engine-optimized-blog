@@ -59,6 +59,12 @@ exports.update = (req, res) => {
     let user = req.profile;
     user = _.extend(user, fields);
 
+    if (fields.password && fields.password.length < 6) {
+      return res.status(400).json({
+        error: "Password should be min 6 characters long"
+      });
+    }
+
     if (files.photo) {
       if (files.photo.size > 10000000) {
         return res.status(400).json({
@@ -72,7 +78,7 @@ exports.update = (req, res) => {
     user.save((err, result) => {
       if (err) {
         return res.status(400).json({
-          error: errorHandler(err)
+          error: "All filds required"
         });
       }
       user.hashed_password = undefined;
