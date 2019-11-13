@@ -4,25 +4,35 @@ const {
   signup,
   signin,
   signout,
-  requiresSignin
+  requiresSignin,
+  forgotPassword,
+  resetPassword
 } = require("../controllers/auth");
 
 //validators
 const { runValidation } = require("../validators");
 const {
   userSignupValidator,
-  userSigninValidator
+  userSigninValidator,
+  forgotPasswordValidator,
+  resetPasswordValidator
 } = require("../validators/auth");
 
 router.post("/signup", userSignupValidator, runValidation, signup);
 router.post("/signin", userSigninValidator, runValidation, signin);
 router.get("/signout", userSigninValidator, runValidation, signout);
 
-//test
-// router.get("/secret", requiresSignin, (req, res) => {
-//   res.json({
-//     message: "you have access to secret page"
-//   });
-// });
+router.put(
+  "/forgot-password",
+  forgotPasswordValidator,
+  runValidation,
+  forgotPassword
+);
+router.put(
+  "/reset-password",
+  resetPasswordValidator,
+  runValidation,
+  resetPassword
+);
 
 module.exports = router;
