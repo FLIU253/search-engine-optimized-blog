@@ -1,1 +1,9 @@
-Built with react, mongoDB, node, nextjs
+# SEO Blog
+
+A fullstack blogging website built with:
+
+- React
+- MongoDB
+- Node
+- Express
+- Nextjs
